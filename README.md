@@ -4,4 +4,7 @@ W celu uruchomienia aplikacji należy użyc polecenia (znajdując się w tym sam
 
 docker-compose up --build
 
-Następnie można przystapić do testowania.
+Następnie można przystapić do testowania pod adresem:
+https://localhost:443/
+Lub (automatycznie nastąpi przekierowanie do https://localhost:443/):
+http://localhost:80/
