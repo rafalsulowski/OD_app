@@ -1,0 +1,11 @@
+observable
+pyOpenSSL
+python3-ldap
+Flask
+waitress
+requests
+passlib
+pycryptodome
+bleach
+Mail
+Flask-Mail

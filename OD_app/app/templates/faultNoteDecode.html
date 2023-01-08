@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block username %}{{user}}{% endblock %}
+{% block title %}Wrong credentials{% endblock %}
+
+{% block content %}
+
+<div class="d-flex justify-content-center">
+    Wrong credentials! {{n}} chance left to block note!
+</div>
+
+<div class="d-flex justify-content-center">
+<form action="/checkEncryptedNote" method="POST">
+    <input value="{{ csrf }}" type="hidden" name="csrf">
+    <input value="{{id}}" type="hidden" name="id">
+    <input value="Yes" type="hidden" name="isEncrypted">
+    <input class="btn btn-outline-info" type="submit" value="Try again">
+</form>
+</div>
+
+{% endblock %}

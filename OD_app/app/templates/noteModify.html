@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block username %}{{user}}{% endblock %}
+{% block title %}Note manage{% endblock %}
+
+{% block content %}
+
+<div class="d-flex justify-content-center">
+    <div style="margin-bottom: 20px; width: 400px; border: 1px solid black;">
+        <form action="/update" method="POST">
+            <input value="{{ csrf }}" type="hidden" name="csrf"> 
+
+            <strong>Note of user:</strong> {{note[1]}}
+            </br><strong>Encrypted:</strong>
+            <select style="max-width: 450px;" required class="form-select" onchange="encryptedChange(this.value)" aria-label="Default select example" name="encrypt">
+                {% if note[5] == "Yes" %}
+                <option value="1">{{note[5]}}</option>
+                <option value="0">No</option>
+                {% else %}
+                <option value="0">{{note[5]}}</option>
+                <option value="1">Yes</option>
+                {% endif %}
+              </select>
+            </br><strong>Tilte:</strong> <input value="{{note[3]}}" name="title" type="text" />
+            <!--Jeli udostepniana dla wybranych uzytkownikow to wybierz zaznacz ich checkbox-->
+            <div id="sharedCBlist">
+                <label style="margin-top: 30px;" id="notePasswordLabel" for="notePassword">Set who will see this note: </label>
+                {% for i in range(0, lenSU) %}
+                {% if user == shareUsers[i] %}
+                    </br>(Me) {{user}} <input type="checkbox" name="cb{{i}}" value="{{user}}" checked disabled readonly/>
+                {% else %}
+                    </br>{{shareUsers[i]}} <input type="checkbox" name="cb{{i}}" value="{{shareUsers[i]}}" />
+                {% endif %}
+                {% endfor %}
+                </div>
+            </div>
+            </br><strong>Content:</strong> <textarea id="markdown" value="{{note[2]}}" required name="markdown"
+                rows="20" cols="100"></textarea>
+        </form>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    window.onload = function() {
+    const formulage = document.getElementById('formSettings');
+    const notePassword = document.getElementById('notePassword');
+    const notePasswordLabel = document.getElementById('notePasswordLabel');
+    const sharedCBlist = document.getElementById('sharedCBlist');
+    const ShareDiv = document.getElementById('ShareDiv');
+    sharedCBlist.style.display = "none";
+    notePassword.style.display = "none";
+    notePasswordLabel.style.display = "none";
+};
+    
+    
+    function encryptedChange(val){
+        if(val == 1)
+        {
+          notePassword.style.display = "block";
+          notePasswordLabel.style.display = "block";
+          ShareDiv.style.display = "none";
+        }
+        else
+        {
+          notePassword.style.display = "none";
+          notePasswordLabel.style.display = "none";
+          ShareDiv.style.display = "block";
+        }
+    }
+    
+    function sharedChange(val){
+        if(val == 1)
+        {
+          sharedCBlist.style.display = "block";
+        }
+        else
+        {
+          sharedCBlist.style.display = "none";
+        }
+    }
+    
+    </script>
+    
+    
+    {% endblock %}
+    

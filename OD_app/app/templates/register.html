@@ -1,0 +1,29 @@
+{% extends "baseWithOutAuth.html" %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+
+<div class="d-flex justify-content-center">
+    Register new user:
+</div>
+
+<div class="d-flex justify-content-center">
+    <form style="margin-top: 20px;" action="/register" method="POST">
+        <input placeholder="type login" value="" required type="text" name="login">
+        </br></br><input placeholder="type password" value="" required type="password" name="password">
+        </br></br><input placeholder="retype password" value="" required type="password" name="password2">
+        </br></br><input placeholder="type email" value="" required type="text" name="email">
+        </br></br><input class="btn btn-outline-info" type="submit" value="Register">
+    </form>
+</div>
+
+<div class="d-flex justify-content-center">
+    <div style="margin-top: 200px;">
+    Have an account?
+    <button style="margin-left: 20px;" class="btn btn-outline-secondary"><a style="text-decoration: none;"
+        href="{{ url_for('login')}}">Login</a></button>
+    </div>
+</div>
+
+{% endblock %}

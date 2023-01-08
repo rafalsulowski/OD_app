@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block username %}{{user}}{% endblock %}
+{% block title %}Notes{% endblock %}
+
+{% block content %}
+
+<div class="d-flex justify-content-center"> 
+<h3>Notes</h3>
+</div>
+{% for i in range(0, lenNotes) %}
+    <div class="d-flex justify-content-center"> 
+        <div style="margin-bottom: 20px; width: 400px; border: 1px solid black;">
+            <div style="float:left">
+                <strong>Note of user:</strong> {{notes[i][1]}}
+            </div>
+            <div style="margin-left: 100px; float: left">
+                <form action="/checkEncryptedNote" method="POST">
+                    <input value="{{ csrf }}" type="hidden" name="csrf">
+                    <input value="{{notes[i][0]}}" type="hidden" name="id">
+                    <input value="{{notes[i][6]}}" type="hidden" name="isEncrypted">
+                    <input class="btn btn-outline-info" type="submit" value="See more">
+                </form>
+            </div>
+            <div style="clear: left"></div>
+            </br><strong>Tilte:</strong> {{notes[i][4]}}
+            {% if notes[i][6] == "Yes" %}
+                </br><strong>Content:</strong> Encrypted
+            {% else %}
+                </br><strong>Content:</strong> {{notes[i][3]}}
+            {% endif %}
+            </br><strong>Is Encrypted:</strong> {{notes[i][6]}}
+        </div>
+    </div>
+{% endfor %}
+{% endblock %}

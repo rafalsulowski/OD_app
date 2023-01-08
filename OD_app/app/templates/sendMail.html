@@ -1,0 +1,28 @@
+{% extends "baseWithOutAuth.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+
+<div class="d-flex justify-content-center">
+    Reset password:
+</div>
+
+
+<div class="d-flex justify-content-center">
+    <form style="margin-top: 20px;" action="/sendMailToUser" method="POST">
+        <input placeholder="type username" value="" required type="text" name="username">
+        </br></br><input class="btn btn-outline-info" type="submit" value="Send verifing code">
+    </form>
+</div>
+
+<div style="margin-top: 200px;">
+    <div class="d-flex justify-content-center">
+    </br></br>Cancel operation:
+    <button style="margin-left: 20px;" class="btn btn-outline-secondary"><a style="text-decoration: none;"
+        href="{{ url_for('login')}}">Cancel</a></button>
+    </div>
+</div>
+
+{% endblock %}

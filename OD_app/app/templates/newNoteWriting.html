@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block username %}{{user}}{% endblock %}
+{% block title %}Creating new note{% endblock %}
+{% block content %}
+
+
+<div class="d-flex justify-content-center">
+  <form action="/newNoteWriting" method="POST">
+    <input value="{{ csrf }}" type="hidden" name="csrf">
+    <input name="id" type="hidden" value="{{id}}">
+    <label for="markdown">Input some words:</label><br>
+    <textarea style=" inline-size: 150px; overflow-wrap: break-word;" id="markdown" required name="markdown" rows="20" cols="100"></textarea>
+    <br>
+    <input type="submit" value="Submit">
+  </form>
+</div>
+
+<script>
+  new FroalaEditor('textarea');
+</script>
+
+
+{% endblock %}
+

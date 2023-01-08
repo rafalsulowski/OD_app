@@ -1,0 +1,34 @@
+{% extends "baseWithOutAuth.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+
+<div class="d-flex justify-content-center">
+    Login user:
+</div>
+
+
+<div class="d-flex justify-content-center">
+    <form style="margin-top: 20px;" action="/login" method="POST">
+        <input placeholder="type login" value="" required type="text" name="login">
+        </br></br><input placeholder="type password" value="" required type="password" name="password">
+        </br></br><input class="btn btn-outline-info" type="submit" value="Login">
+    </form>
+</div>
+
+<div style="margin-top: 200px;">
+    <div class="d-flex justify-content-center">
+    </br></br>Don't have an account?
+    <button style="margin-left: 20px;" class="btn btn-outline-secondary"><a style="text-decoration: none;"
+        href="{{ url_for('register')}}">Register</a></button>
+    </div>
+    <div class="d-flex justify-content-center">
+        </br></br>Don't remeber a password or account is block?
+        <button style="margin-left: 20px;" class="btn btn-outline-secondary"><a style="text-decoration: none;"
+                href="{{ url_for('sendMailToUser')}}">Reset password</a></button>
+    </div>
+</div>
+
+{% endblock %}

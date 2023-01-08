@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block username %}{{user}}{% endblock %}
+{% block title %}Note manage{% endblock %}
+
+{% block content %}
+
+
+<div style="margin-bottom: 50px;" class="d-flex justify-content-center">
+    {% if user == note[1] %}
+    <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
+        data-bs-target="#exampleModal">Remove</button>
+    {% endif %}
+    <button style="margin-left: 20px;" class="btn btn-outline-secondary"><a style="text-decoration: none;"
+            href="{{ url_for('showNotes')}}">Come back</a></button>
+</div>
+
+<div class="d-flex justify-content-center">
+    <div style="margin-bottom: 20px; width: 400px; border: 1px solid black;">
+        <strong>Note of user:</strong> {{note[1]}}
+        </br><strong>Encrypted:</strong> {{note[5]}}
+        </br><strong>Tilte:</strong> {{note[3]}}
+        </br><strong>Share to:</strong>
+        <div style="margin-left: 55px;">
+            {% for i in range(0, lenIn) %}
+            {% if user == shareUsers["1"][i] %}
+            (Me) {{user}} <input type="checkbox" name="cb{{i}}" value="{{user}}" checked disabled readonly /></br>
+            {% else %}
+            {{shareUsers['1'][i]}} <input type="checkbox" name="cb{{i}}" value="{{shareUsers['1'][i]}}" disabled checked
+                readonly /></br>
+            {% endif %}
+            {% endfor %}
+            {% for i in range(0, lenOut) %}
+            {{shareUsers['0'][i]}} <input type="checkbox" name="cb{{i}}" value="{{shareUsers['0'][i]}}" disabled
+                readonly /></br>
+            {% endfor %}
+        </div>
+        </br><strong>Content:</strong> <span style=" inline-size: 150px; overflow-wrap: break-word;">{{note[2]}}</span>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Remove note</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you shure to remove this note?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <form action="/deleteNote" method="POST">
+                    <input value="{{ csrf }}" type="hidden" name="csrf">
+                    <input class="btn btn-outline-secondary" name="id" type="hidden" value="{{note[0]}}" />
+                    <input class="btn btn-outline-danger" type="submit" value="Usuń" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
